@@ -1,0 +1,9 @@
+{
+  "name": "calculadora-de-gastos",
+  "version": "1.0.0",
+  "description": "Calculadora de gastos compartidos entre personas",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . -p 3000"
+  }
+}

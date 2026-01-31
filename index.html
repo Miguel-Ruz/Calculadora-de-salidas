@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Calculadora de gastos compartidos entre personas. Calcula quién debe pagar a quién y cuánto.">
+  <title>Divide — Gastos compartidos entre personas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="header-top">
+        <div>
+          <h1 class="logo">Divide</h1>
+          <p class="tagline">Gastos compartidos entre personas</p>
+        </div>
+        <div class="currency-selector-wrapper">
+          <label for="currencySelect" class="currency-label">Moneda</label>
+          <select id="currencySelect" class="currency-select" aria-label="Seleccionar moneda para los cálculos">
+            <option value="COP" selected>Peso colombiano ($)</option>
+            <option value="USD">Dólar estadounidense (US$)</option>
+            <option value="EUR">Euro (€)</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-grid">
+      <section class="participants-section card card-accent">
+        <div class="section-badge">Paso 1</div>
+        <h2>Personas</h2>
+        <p class="section-desc">Añade a todas las personas que participan en el gasto compartido.</p>
+        <div class="participants-list" id="participantsList">
+          <div class="participant-input">
+            <input type="text" id="participantName" placeholder="Nombre de la persona" aria-label="Nombre de la persona" autocomplete="off">
+            <button type="button" class="btn btn-primary" id="addParticipant" aria-label="Añadir persona">Añadir</button>
+          </div>
+        </div>
+        <ul class="participants-tags" id="participantsTags" aria-live="polite"></ul>
+        <p class="hint" id="participantsHint">Añade al menos 2 personas para registrar gastos</p>
+      </section>
+
+      <section class="expenses-section card" id="expensesSection">
+        <div class="section-badge">Paso 2</div>
+        <h2>Gastos</h2>
+        <p class="section-desc">Registra cada gasto indicando quién realizó el pago.</p>
+        <div class="expense-section-lock" id="expenseSectionLock" aria-hidden="false">
+          <p>Añade al menos 2 personas en el Paso 1 para poder registrar gastos.</p>
+        </div>
+        <div class="expense-form" id="expenseForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expenseDescription">Concepto</label>
+            <input type="text" id="expenseDescription" placeholder="Ej: Cena, entradas, taxi..." aria-label="Descripción del gasto" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="expenseAmount" id="expenseAmountLabel">Importe</label>
+            <input type="number" id="expenseAmount" placeholder="0" min="0" step="0.01" aria-label="Importe">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expensePayer">Quién pagó</label>
+            <select id="expensePayer" aria-label="Persona que realizó el pago">
+              <option value="">Selecciona quién pagó</option>
+            </select>
+          </div>
+          <div class="form-group form-group-actions">
+            <label>&nbsp;</label>
+            <button type="button" class="btn btn-primary" id="addExpense" aria-label="Añadir gasto">Añadir gasto</button>
+          </div>
+        </div>
+      </div>
+        <ul class="expenses-list" id="expensesList" aria-live="polite"></ul>
+      </section>
+
+      <section class="results-section card card-results" id="resultsSection">
+        <div class="section-badge">Resumen</div>
+        <h2>¿Quién paga a quién?</h2>
+        <div class="results-content" id="resultsContent">
+          <p class="empty-state" id="emptyResults">Añade personas y gastos para ver el resumen</p>
+          <div class="settlement-details" id="settlementDetails" hidden>
+            <div class="results-preview" id="resultsPreview">
+              <div class="total-summary">
+                <p><strong>Total gastado:</strong> <span id="totalAmount">0</span></p>
+                <p><strong>Por persona:</strong> <span id="perPerson">0</span></p>
+              </div>
+              <div class="balances" id="balancesList"></div>
+              <h3>Quién debe pagar a quién</h3>
+              <ul class="settlements" id="settlementsList"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="export-actions" id="exportActions" hidden>
+          <button type="button" class="btn btn-secondary" id="exportImage" aria-label="Descargar como imagen">
+            <span class="btn-icon" aria-hidden="true">📷</span>
+            Descargar imagen
+          </button>
+          <button type="button" class="btn btn-secondary" id="exportPdf" aria-label="Descargar como PDF">
+            <span class="btn-icon" aria-hidden="true">📄</span>
+            Descargar PDF
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Comprobante estilizado para exportar (oculto, se clona al exportar) -->
+  <div class="comprobante" id="comprobante">
+    <div class="comprobante-inner">
+      <div class="comprobante-header">
+        <span class="comprobante-logo">Divide</span>
+        <span class="comprobante-subtitle">Resumen de gastos compartidos</span>
+      </div>
+      <div class="comprobante-divider"></div>
+      <div class="comprobante-totals">
+        <div class="comprobante-total-row">
+          <span>Total</span>
+          <span id="comprobanteTotal">0</span>
+        </div>
+        <div class="comprobante-total-row comprobante-per-person">
+          <span>Por persona</span>
+          <span id="comprobantePerPerson">0</span>
+        </div>
+      </div>
+      <div class="comprobante-divider"></div>
+      <div class="comprobante-balances" id="comprobanteBalances"></div>
+      <div class="comprobante-divider"></div>
+      <div class="comprobante-settlements">
+        <h4 class="comprobante-section-title">Transferencias a realizar</h4>
+        <ul class="comprobante-settlements-list" id="comprobanteSettlementsList"></ul>
+      </div>
+      <div class="comprobante-footer">
+        <span class="comprobante-date" id="comprobanteDate"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

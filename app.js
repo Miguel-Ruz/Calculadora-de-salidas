@@ -148,8 +148,7 @@ function removeTripPerson(tripId, name) {
 function addOuting(tripId, name) {
   const trip = getTrip(tripId);
   if (!trip) return;
-  const trimmed = name.trim();
-  if (!trimmed) return;
+  const trimmed = (name || '').trim() || 'Salida';
   const outing = {
     id: genId(),
     name: trimmed,
@@ -513,13 +512,23 @@ function updateComprobante(summary) {
 
 // --- Modal salida ---
 function openOutingModal() {
-  document.getElementById('outingModalOverlay').hidden = false;
+  const overlay = document.getElementById('outingModalOverlay');
+  overlay.classList.add('is-open');
+  overlay.setAttribute('aria-hidden', 'false');
   document.getElementById('outingNameInput').value = '';
   document.getElementById('outingNameInput').focus();
+  document.addEventListener('keydown', handleModalKeydown);
 }
 
 function closeOutingModal() {
-  document.getElementById('outingModalOverlay').hidden = true;
+  const overlay = document.getElementById('outingModalOverlay');
+  overlay.classList.remove('is-open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.removeEventListener('keydown', handleModalKeydown);
+}
+
+function handleModalKeydown(e) {
+  if (e.key === 'Escape') closeOutingModal();
 }
 
 // --- Export ---
@@ -596,10 +605,14 @@ document.getElementById('addOutingBtn').addEventListener('click', () => {
   if (trip && trip.people.length >= 2) openOutingModal();
 });
 
-document.getElementById('confirmOutingBtn').addEventListener('click', () => {
+document.getElementById('confirmOutingBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
   const trip = getCurrentTrip();
   const input = document.getElementById('outingNameInput');
-  if (trip) addOuting(trip.id, input.value);
+  if (trip) {
+    addOuting(trip.id, input.value);
+    closeOutingModal();
+  }
 });
 
 document.getElementById('outingNameInput').addEventListener('keydown', e => {

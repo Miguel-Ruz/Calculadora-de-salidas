@@ -786,20 +786,27 @@ select:focus {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.7);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 10000;
   padding: var(--space-md);
 }
 
-.modal {
+.modal-overlay.is-open {
+  display: flex;
+}
+
+.modal-overlay .modal {
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   max-width: 400px;
   width: 100%;
   border: 1px solid var(--color-border);
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .modal h3 {

@@ -536,6 +536,301 @@ select:focus {
   margin-top: var(--space-sm);
 }
 
+/* ========== VIAJES Y SALIDAS ========== */
+.trips-list-section .card {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.trip-create-form {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.trip-create-form input {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 1rem;
+  font-family: inherit;
+  color: #ffffff;
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.trip-create-form input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.trips-list {
+  list-style: none;
+}
+
+.trip-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-bg-input);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+  border: 1px solid var(--color-border);
+}
+
+.trip-item-main {
+  flex: 1;
+}
+
+.trip-item-meta {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
+}
+
+.trip-item-actions {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  padding: 0 var(--space-md);
+}
+
+.breadcrumb-link {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-size: 0.9375rem;
+  padding: 0;
+}
+
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-sep {
+  color: var(--color-text-tertiary);
+}
+
+.breadcrumb-current {
+  color: var(--color-text-tertiary);
+  font-size: 0.9375rem;
+}
+
+.btn-sm {
+  padding: var(--space-xs) var(--space-md);
+  min-height: 36px;
+  font-size: 0.875rem;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-tertiary);
+  border: none;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.outings-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.outings-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.outing-card {
+  padding: var(--space-lg);
+}
+
+.outing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.outing-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.outing-participants {
+  margin-bottom: var(--space-md);
+}
+
+.outing-label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.participants-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+  font-size: 0.9375rem;
+  color: #ffffff;
+}
+
+.checkbox-label input {
+  width: auto;
+  min-height: auto;
+}
+
+.expense-form-mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.expense-form-mini input,
+.expense-form-mini select {
+  min-height: 40px;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 0.9375rem;
+}
+
+.expense-form-mini .expense-desc {
+  flex: 1;
+  min-width: 120px;
+}
+
+.expense-form-mini .expense-amt {
+  width: 90px;
+}
+
+.expense-form-mini .expense-payer {
+  flex: 1;
+  min-width: 120px;
+}
+
+.expenses-list-mini {
+  list-style: none;
+  margin-bottom: var(--space-md);
+}
+
+.expense-item-mini {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-input);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-xs);
+  font-size: 0.9375rem;
+}
+
+.expense-item-mini span:first-child {
+  flex: 1;
+}
+
+.expense-item-mini button {
+  background: none;
+  border: none;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  padding: var(--space-xs);
+}
+
+.expense-item-mini button:hover {
+  color: var(--color-debt);
+}
+
+.outing-summary {
+  font-size: 0.875rem;
+  color: var(--color-text-tertiary);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.outing-settlements-preview {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8125rem;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-md);
+}
+
+.modal {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  max-width: 400px;
+  width: 100%;
+  border: 1px solid var(--color-border);
+}
+
+.modal h3 {
+  margin: 0 0 var(--space-lg);
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.modal input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 1rem;
+  font-family: inherit;
+  color: #ffffff;
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+}
+
+.modal input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: flex-end;
+}
+
 /* ========== COMPROBANTE ESTILIZADO ========== */
 .comprobante {
   position: fixed;

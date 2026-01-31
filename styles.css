@@ -4,8 +4,8 @@
 
 :root {
   --color-text-primary: #1a1a1a;
-  --color-text-secondary: #4a4a4a;
-  --color-text-tertiary: #6e6e73;
+  --color-text-secondary: #cec9c9;
+  --color-text-tertiary: #7f7f83;
   
   --color-bg-main: #0f0f12;
   --color-bg-card: #1a1a1f;
@@ -145,15 +145,15 @@ body {
 }
 
 .app-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-lg);
   align-items: start;
 }
 
 /* Cards */
 .card {
+  width: 100%;
   background: var(--color-bg-card);
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
